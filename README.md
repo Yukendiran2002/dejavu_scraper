@@ -111,21 +111,21 @@ When you call `build()` with a `wanted_list`, DejavuScraper:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        BUILD PROCESS                             │
+│                        BUILD PROCESS                            │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
+│                                                                 │
 │  1. Parse HTML with BeautifulSoup                               │
-│           ↓                                                      │
+│           ↓                                                     │
 │  2. Find ALL elements containing wanted text                    │
-│           ↓                                                      │
+│           ↓                                                     │
 │  3. For each match, create a "stack" (extraction rule):         │
-│     • Tag name (e.g., 'h2', 'span', 'a')                       │
-│     • Attributes (e.g., class=['title'], style='')             │
-│     • Path from root (parent → child relationships)            │
-│     • Whether to extract text or attribute (href, src)         │
-│           ↓                                                      │
+│     • Tag name (e.g., 'h2', 'span', 'a')                        │
+│     • Attributes (e.g., class=['title'], style='')              │
+│     • Path from root (parent → child relationships)             │
+│     • Whether to extract text or attribute (href, src)          │
+│           ↓                                                     │
 │  4. Store rules in stack_list                                   │
-│                                                                  │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -135,21 +135,21 @@ When extracting from new pages:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      EXTRACTION PROCESS                          │
+│                      EXTRACTION PROCESS                         │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
+│                                                                 │
 │  For each rule in stack_list:                                   │
-│           ↓                                                      │
+│           ↓                                                     │
 │  1. Start from document root                                    │
-│           ↓                                                      │
+│           ↓                                                     │
 │  2. Navigate using stored tag names + attributes                │
-│           ↓                                                      │
+│           ↓                                                     │
 │  3. Apply fuzzy matching if configured                          │
-│           ↓                                                      │
+│           ↓                                                     │
 │  4. Extract text content or specified attribute                 │
-│           ↓                                                      │
+│           ↓                                                     │
 │  5. Return all matching results                                 │
-│                                                                  │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -187,27 +187,27 @@ scraper = DejavuScraper(adaptive=True)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                   ADAPTIVE EXTRACTION FLOW                       │
+│                   ADAPTIVE EXTRACTION FLOW                      │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
+│                                                                 │
 │  PHASE 1: FINGERPRINTING (during build)                         │
 │  ─────────────────────────────────────                          │
 │  For each found element, capture:                               │
-│  • Tag name                                                      │
+│  • Tag name                                                     │
 │  • All attributes (class, id, data-*, etc.)                     │
-│  • Text content                                                  │
+│  • Text content                                                 │
 │  • DOM path (parent/child hierarchy)                            │
-│  • Parent element properties                                     │
-│  • Grandparent element properties                                │
-│  • Children structure                                            │
+│  • Parent element properties                                    │
+│  • Grandparent element properties                               │
+│  • Children structure                                           │
 │  • Special attributes (href, src, etc.)                         │
-│                                                                  │
+│                                                                 │
 │  PHASE 2: SIMILARITY MATCHING (during extraction)               │
 │  ───────────────────────────────────────────────                │
-│  When structure changes:                                         │
-│           ↓                                                      │
+│  When structure changes:                                        │
+│           ↓                                                     │
 │  1. Extract properties from ALL candidate elements              │
-│           ↓                                                      │
+│           ↓                                                     │
 │  2. Calculate weighted similarity score:                        │
 │     ┌──────────────────────────────────────┐                    │
 │     │  tag_name:      15% weight           │                    │
@@ -219,9 +219,9 @@ scraper = DejavuScraper(adaptive=True)
 │     │  children:      10% weight           │                    │
 │     │  special_attrs:  5% weight           │                    │
 │     └──────────────────────────────────────┘                    │
-│           ↓                                                      │
+│           ↓                                                     │
 │  3. Return element with highest score > min_similarity          │
-│                                                                  │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
