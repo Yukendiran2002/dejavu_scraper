@@ -61,12 +61,17 @@ DejavuScraper is an intelligent web scraping library that automatically learns s
 
 ## 📦 Installation
 
+### From PyPI (recommended)
+
 ```bash
-# Clone the repository
+pip install dejavu-scraper
+```
+
+### From Source
+
+```bash
 git clone https://github.com/Yukendiran2002/dejavu_scraper.git
 cd dejavu_scraper
-
-# Install dependencies
 pip install requests
 ```
 
