@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "dejavu-scraper"
+version = "2.0.0"
+description = "A Smart, Automatic, Fast and Lightweight Web Scraper for Python with adaptive extraction and cross-site flexible matching."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Yukendiran J"},
+]
+keywords = ["scraper", "web-scraping", "auto-scraper", "data-extraction", "adaptive"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup :: HTML",
+]
+dependencies = [
+    "requests>=2.25.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/YukendiranJ/dejavu-scraper"
+
+[tool.setuptools.packages.find]
+include = ["dejavu_scraper*"]
+
+[tool.setuptools.package-data]
+dejavu_scraper = ["beautifulsoup4/**/*"]
