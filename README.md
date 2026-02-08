@@ -45,8 +45,8 @@ DejavuScraper is an intelligent web scraping library that automatically learns s
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/intelligent-scraper.git
-cd intelligent-scraper
+git clone https://github.com/Yukendiran2002/dejavu_scraper.git
+cd dejavu_scraper
 
 # Install dependencies
 pip install requests
@@ -586,7 +586,7 @@ Test coverage:
 ## 📁 Project Structure
 
 ```
-intelligent-scraper/
+dejavu_scraper/
 ├── dejavu_scraper/
 │   ├── __init__.py           # Package exports
 │   ├── dejavu_scraper.py     # Main DejavuScraper class
