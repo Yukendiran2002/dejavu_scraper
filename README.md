@@ -4,7 +4,7 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-2.0.0-green.svg)]()
+[![Version](https://img.shields.io/badge/version-2.0.1-green.svg)]()
 
 DejavuScraper is an intelligent web scraping library that automatically learns scraping rules from examples. Provide a sample of what you want to extract, and it figures out how to get similar data from any page — even pages with completely different HTML structures.
 
@@ -33,6 +33,7 @@ DejavuScraper is an intelligent web scraping library that automatically learns s
   - [Text Cleaning](#text-cleaning)
   - [smart_extract()](#smart_extract--all-in-one)
 - [Save & Load](#-save--load)
+- [Use with AI Agents (Browser MCP)](#-use-with-ai-agents-browser-mcp)
 - [Rule Management](#-rule-management)
 - [Production Features](#-production-features)
 - [How It Works](#-how-it-works)
@@ -493,6 +494,30 @@ Format is auto-detected from file extension, or specify explicitly:
 ```python
 scraper.save('model', format='json')   # or 'db', 'sqlite'
 ```
+
+---
+
+## 🤖 Use with AI Agents (Browser MCP)
+
+[Browser MCP](https://github.com/Yukendiran2002/browser_mcp) includes a TypeScript port of DejavuScraper, so AI agents (Claude, Cursor, VS Code, …) can learn a scraper from one example and reuse it without an LLM call per page. JSON rule files work in both directions:
+
+```text
+agent → learn_extractor {name: "products", url: "https://shop.example/phones",
+                         examples: {"name": ["iPhone 15"], "price": ["$999.00"]}}
+agent → run_extractor   {name: "products", url: "https://shop.example/laptops", followPages: 10}
+```
+
+```python
+# Rules learned by the agent (saved to ~/.browser-mcp/extractors/) load here…
+scraper = DejavuScraper()
+scraper.load(os.path.expanduser('~/.browser-mcp/extractors/products.json'))
+scraper.get_result_similar(url='https://shop.example/tablets', group_by_alias=True)
+
+# …and models saved here can be run by the agent:
+scraper.save('products.json')   # run_extractor {name: "/abs/path/products.json"}
+```
+
+Only `stack_list` rules are shared; adaptive data and content fingerprints stay Python-only. The MCP side stores its own fingerprint per rule (`fp`) for self-healing, and Python ignores it.
 
 ---
 

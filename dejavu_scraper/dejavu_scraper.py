@@ -20,7 +20,17 @@ try:
 except ImportError:
     from requests.packages.urllib3.util.retry import Retry
 
-from .beautifulsoup4.bs4 import BeautifulSoup
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    # Fall back to the vendored copy. Its modules use absolute `bs4` imports,
+    # so the vendored directory has to be importable as a top-level package.
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "beautifulsoup4"))
+    with warnings.catch_warnings():
+        # The vendored copy warns when soupsieve is missing; CSS selectors are not used here.
+        warnings.simplefilter("ignore")
+        from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 
