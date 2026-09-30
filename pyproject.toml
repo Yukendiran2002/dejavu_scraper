@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dejavu-scraper"
-version = "2.0.0"
+version = "2.0.1"
 description = "A Smart, Automatic, Fast and Lightweight Web Scraper for Python with adaptive extraction and cross-site flexible matching."
 readme = "README.md"
 license = {text = "MIT"}
